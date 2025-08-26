@@ -8,11 +8,9 @@ test.describe('Basic Layout and Structure', () => {
   });
 
   test('should have header and footer', async ({ page }) => {
-    // Header - React.dev uses navigation bar
     const header = page.locator('nav').first();
     await expect(header).toBeVisible();
     
-    // Footer - scroll to bottom and check for footer links
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
     await page.waitForTimeout(1000);
     
@@ -36,7 +34,6 @@ test.describe('Basic Layout and Structure', () => {
     const nav = page.locator('nav').first();
     await expect(nav).toBeVisible();
     
-    // Check for navigation links
     const navLinks = nav.locator('a');
     const linkCount = await navLinks.count();
     expect(linkCount).toBeGreaterThan(0);
@@ -49,13 +46,11 @@ test.describe('Basic Layout and Structure', () => {
 
   test.skip('should have theme toggle button', async ({ page }) => {
     // NOTE: React.dev uses system preferences for theme, no toggle button exists
-    // Keeping this test as skipped for documentation purposes
     const themeButton = page.locator('button[aria-label*="theme"], button[aria-label*="appearance"]').first();
     
     if (await themeButton.isVisible({ timeout: 1000 }).catch(() => false)) {
       await themeButton.click();
       await page.waitForTimeout(500);
-      // Would verify theme change here
     } else {
       test.skip();
     }

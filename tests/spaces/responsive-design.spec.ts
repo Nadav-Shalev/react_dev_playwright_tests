@@ -10,14 +10,12 @@ test.describe('Responsive Design', () => {
   test('adapts to mobile viewport (375px)', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 });
     
-    // Navigation should still be accessible (via hamburger or visible)
     const nav = page.locator('nav').first();
     const hamburger = page.locator('button[aria-label*="menu"], button[aria-label*="Menu"]');
     
     const navVisible = await nav.isVisible();
     const hamburgerVisible = await hamburger.isVisible({ timeout: 1000 }).catch(() => false);
     
-    // Either nav is visible or hamburger menu exists
     expect(navVisible || hamburgerVisible).toBeTruthy();
   });
 
@@ -27,7 +25,6 @@ test.describe('Responsive Design', () => {
     const nav = page.locator('nav').first();
     await expect(nav).toBeVisible();
     
-    // Content should be readable
     const mainContent = page.locator('main, [role="main"]').first();
     await expect(mainContent).toBeVisible();
   });
@@ -38,11 +35,9 @@ test.describe('Responsive Design', () => {
     const nav = page.locator('nav').first();
     await expect(nav).toBeVisible();
     
-    // Desktop should not show hamburger menu
     const hamburger = page.locator('button[aria-label*="menu"], button[aria-label*="Menu"]');
     const hamburgerVisible = await hamburger.isVisible({ timeout: 500 }).catch(() => false);
     
-    // Navigation should be fully visible on desktop
     await expect(nav).toBeVisible();
   });
 
@@ -55,7 +50,6 @@ test.describe('Responsive Design', () => {
       await hamburger.click();
       await page.waitForTimeout(500);
       
-      // Menu should expand/show navigation items
       const navItems = page.locator('nav a');
       const visibleItems = await navItems.count();
       expect(visibleItems).toBeGreaterThan(0);
@@ -65,7 +59,6 @@ test.describe('Responsive Design', () => {
   test('content remains readable on small screens', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 });
     
-    // Check that main heading is visible and sized appropriately
     const heading = page.locator('h1').first();
     await expect(heading).toBeVisible();
     
@@ -73,7 +66,6 @@ test.describe('Responsive Design', () => {
       window.getComputedStyle(el).fontSize
     );
     
-    // Font size should be readable (at least 16px)
     expect(parseInt(fontSize)).toBeGreaterThanOrEqual(16);
   });
 
@@ -85,9 +77,8 @@ test.describe('Responsive Design', () => {
     
     if (imageCount > 0) {
       const firstImage = images.first();
-      const width = await firstImage.evaluate(el => el.offsetWidth);
+      const width = await firstImage.evaluate(el => (el as HTMLElement).offsetWidth);
       
-      // Images should not overflow viewport
       expect(width).toBeLessThanOrEqual(375);
     }
   });
@@ -95,12 +86,10 @@ test.describe('Responsive Design', () => {
   test('horizontal scrolling is not required', async ({ page }) => {
     await page.setViewportSize({ width: 375, height: 667 });
     
-    // Check if horizontal scrollbar exists
     const hasHorizontalScroll = await page.evaluate(() => {
       return document.documentElement.scrollWidth > document.documentElement.clientWidth;
     });
     
-    // Should not require horizontal scrolling on mobile
     expect(hasHorizontalScroll).toBeFalsy();
   });
 });
