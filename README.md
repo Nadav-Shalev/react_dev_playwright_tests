@@ -9,20 +9,6 @@ Technologies Used:
     Page Object Model - Design pattern for maintainable test architecture
     GitHub Actions - CI/CD pipeline for automated test execution
 
-Project Structure:
-    earnix-react-testing/
-    ├── tests/
-    │   ├── pages/          # Page Object classes
-    │   │   └── HomePage.ts  # Homepage page object
-    │   └── specs/           # Test specifications
-    │       └── homepage.spec.ts  # Homepage test suite
-    ├── .github/
-    │   └── workflows/       # GitHub Actions CI/CD
-    │       └── playwright.yml
-    ├── playwright.config.ts # Playwright configuration
-    ├── package.json
-    └── README.md
-
 Installation & Setup:
     - Prerequisites:
         Node.js (v16 or higher)
@@ -183,10 +169,3 @@ Resources:
     React.dev Website: https://react.dev
     Page Object Model Pattern: https://martinfowler.com/bliki/PageObject.html
     TypeScript Best Practices: https://www.typescriptlang.org/docs/
-
-Contact:
-    Nadav - Frontend Developer Student Position Candidate
-
----
-
-This project was created as part of the technical assessment for Earnix. It demonstrates proficiency in test automation, TypeScript, and software engineering best practices.
