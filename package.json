@@ -1,0 +1,19 @@
+{
+  "name": "earnix_exercise",
+  "version": "1.0.0",
+  "description": "Automated testing suite for React.dev using Playwright and TypeScript",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:ui": "playwright test --ui",
+    "test:chrome": "playwright test --project=chromium",
+    "report": "playwright show-report"
+  },
+  "keywords": ["playwright", "testing", "react.dev", "typescript"],
+  "author": "Nadav",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/test": "^1.55.0",
+    "@types/node": "^24.3.0"
+  }
+}
